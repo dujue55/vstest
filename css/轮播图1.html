@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            background-color:gray;
+        }
+      .wrap{
+          width: 400px;
+          height: 264px;
+          position:absolute;
+          left:50%;
+          transform:translateX(-50%)
+      }
+      .wrap-box{
+        width: 400;
+          height: 264px;
+          position: absolute;
+          top:0;
+          left:0; 
+          opacity: 0;
+          transition: all 2s linear;
+      }
+      img{
+          width: 400px;
+          height: 264px;
+      }
+      .active{
+          z-index:10;
+          opacity: 1;
+          transition: all 2s linear;
+      }
+      .active-btn{
+          background-color: blueviolet
+      }
+      .wrap-btn-sam{
+          position:absolute;
+          bottom:10px;
+          z-index:100;
+      }
+      .wrap-btn-left{
+          left:10px;
+      }
+      .wrap-btn-right{
+         right:10px;
+      }
+      button,li{
+          width: 20px;
+          height: 20px;
+          box-sizing: border-box;
+          text-align: center;
+          line-height: 20px;
+          border-radius: 50%;
+          border:0;
+           background-color:#ddd; 
+      }
+      .wrap-btn-right li{
+          list-style:none;
+          float:left;
+          margin-left:5px;
+
+      }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="wrap-box active"><img src="../img/img1.png" alt=""></div>
+        <div class="wrap-box"><img src="../img/img2.jpg" alt=""></div>
+        <div class="wrap-box"><img src="../img/img3.jpg" alt=""></div>
+        <div class="wrap-box"><img src="../img/img4.jpg" alt=""></div>
+        <div class="wrap-btn">
+            <div class="wrap-btn-left wrap-btn-sam">
+                <button class="btn-left">&lt;</button>
+                <button class="btn-right">&gt;</button>
+            </div>
+            <ul class="wrap-btn-right wrap-btn-sam">
+                <li class="active-btn">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+
+        </div>
+    </div>
+    <script>
+
+
+        //节流
+        let flag=true;
+
+        
+        //自动播放
+        var index=0;
+        oBox=document.querySelectorAll('.wrap-box');
+        if(flag){
+            let timer=setInterval(function(){
+            changeImg(++index);
+         },2000)
+        }
+        
+    
+
+    //点击右边按钮
+    var oRightBtn=document.querySelectorAll('.wrap-btn-right li');
+
+
+    for(let i=0;i<oRightBtn.length;i++){
+       if(flag){
+        oRightBtn[i].onclick=function(){ 
+            changeImg(i);
+        }
+       }
+        
+    }
+   
+
+    //点击左边按钮
+     oBtnLeft=document.querySelector('.btn-left');
+     oBtnRight=document.querySelector('.btn-right');
+    
+    
+     if(flag){
+        oBtnLeft.onclick=function(){
+         changeImg(--index);
+     }
+        oBtnRight.onclick=function(){
+         changeImg(++index);
+         
+     }
+     }
+    
+    
+
+    function changeImg(nowIndex){
+        flag=false;
+        if(nowIndex==4){
+            nowIndex=0
+        }
+        if(nowIndex==-1){
+            nowIndex=3
+        }
+        index=nowIndex;
+        for(let j=0;j<oRightBtn.length;j++){
+             oBox[j].classList.remove('active');
+             oRightBtn[j].classList.remove('active-btn');
+             }
+            oBox[nowIndex].classList.add('active');
+            oRightBtn[nowIndex].classList.add('active-btn');
+
+        flag=true;
+     }
+    </script>
+</body>
+</html>

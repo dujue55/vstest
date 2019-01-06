@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrap,.outer,.inner{
+            width: 200px;
+            height: 200px;
+        }
+        .outer,.inner{
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        .wrap{
+            border:1px solid black;
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+        .outer{
+            background-color: aqua;
+            transform-style: preserve-3d;
+            /* transition: all 3s ease; */
+        }
+        .inner{
+            transform:translateZ(-1px) rotateY(180deg);
+            background-color:blueviolet;
+        }
+        .outer:hover{
+            /* transform:rotateY(180deg); */
+            animation: change 3s ease;
+            animation-fill-mode: forwards;
+        }
+        @keyframes change{
+            from{
+               
+                    transform:rotateY(0) 
+                
+            }
+            to{
+                    transform:rotateY(180deg) 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+         <div class="outer">
+              白茶清欢无别事
+             <div class="inner">我在等风也等你</div>
+         </div>
+    </div>
+</body>
+</html>

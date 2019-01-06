@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+       .wrap-box{
+         width: 200px;
+         height: 20px;
+         border:1px solid black;
+         border-radius: 12px;
+       } 
+       .wrap-box-content{
+         height: 20px;
+         width: 0;
+         border-radius: 12px;
+         background-color: aquamarine
+       }
+    </style>
+
+</head>
+<body>
+    <div class="wrap">
+       <div class="wrap-box">
+           <div class="wrap-box-content"></div>
+       </div> 
+       <div class="wrap-btn">开始</div>
+    </div>
+    <script>
+       oContent=document.querySelector(".wrap-box-content");
+       oBtn=document.querySelector(".wrap-btn");
+       num=0;
+       oBtn.onclick=function(){
+        requestAnimationFrame(change)
+       }
+       function change(){
+           oContent.style.width=oContent.offsetWidth+2+'px';
+           num++;
+           oContent.innerText=num+'%';
+        if(oContent.offsetWidth<200){
+            requestAnimationFrame(change)
+        }
+
+       }
+    
+    
+    
+    </script>
+</body>
+</html>

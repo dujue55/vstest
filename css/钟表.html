@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .wrap-position{
+           position: absolute;
+           top:50%;
+           left:50%;
+           transform:translate(-50%,-50%);
+           width: 200px;
+           height: 200px;
+        }
+       ul{
+           position: absolute;
+           top:50%;
+           left:50%;
+           transform:translate(-50%,-50%);
+           width: 200px;
+           height: 200px;
+           border:1px solid black;
+           border-radius: 50%;
+           list-style: none;
+       }
+       li{
+           width: 3px;
+           height: 6px;
+           background-color: black;
+           position:absolute;
+           top:0;
+           left:50%;
+           transform:translateX(-50%);
+           transform-origin:0 100px;
+
+       }
+       li:nth-child(5n+1){
+        height: 10px;
+
+       }
+       .wrap-time-minute,.wrap-time-hour,.wrap-time-second{
+           position: absolute;
+           bottom:50%;
+           left:50%;
+           width: 0;
+           height: 0;
+           border-style:solid;
+           content: "";
+           transform-origin: center bottom;
+       }
+       .wrap-time-hour{
+           z-index:100;
+           border-width: 70px 3px;
+           border-color :transparent transparent red transparent;
+       }
+       .wrap-time-minute{
+           z-index:10;
+           border-width: 85px 3px;
+           border-color :transparent transparent  blue transparent;
+       }
+       .wrap-time-second{
+           z-index:0; 
+           border-width: 100px 3px;
+           border-color :transparent transparent black transparent;
+       }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="wrap-position">
+            <div>
+                <ul class="wrap-box">
+            
+                </ul>
+                <div class="wrap-time">
+                    <div class="wrap-time-hour"></div>
+                    <div class="wrap-time-minute"></div>
+                    <div class="wrap-time-second"></div>
+                </div>
+             </div>
+        </div>
+        
+    </div>
+    <script>
+        
+        window.onload=function(){
+            //动态添加指针
+            oUl=document.querySelector('.wrap-box');
+            var lists=" ";
+            for(var i=0;i<60;i++){
+                lists+='<li class="wrap-box-list">'
+            }
+            oUl.innerHTML=lists;
+
+
+            //旋转指针
+            oLists=document.querySelectorAll('li');
+               for(let i=0;i<60;i++){
+                   oLists[i].style.transform='rotate('+i*6+'deg)';
+                
+               }
+
+
+            //时间
+            function change(){
+                oHour=document.querySelector(".wrap-time-hour");
+                oMiute=document.querySelector('.wrap-time-minute');
+                oSecond=document.querySelector('.wrap-time-second');
+                var newDate=new Date();
+                var second=newDate.getSeconds();
+                var minute=newDate.getMinutes()+second/60;
+                var hour=newDate.getHours()+minute/60;
+                oHour.style.transform='rotate('+hour*6+'deg)';
+                oMiute.style.transform='rotate('+minute*6+'deg)';
+                oSecond.style.transform='rotate('+second*6+'deg)';
+                    
+            }
+           change();
+            
+           setInterval(function(){
+               change();
+           },1000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+      
+       
+    </script>
+</body>
+</html>
